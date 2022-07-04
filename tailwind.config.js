@@ -4,7 +4,11 @@ module.exports = {
     "./src/**/*.tsx",
   ],
   theme: {
-    extend: {},
+    extend: {
+      backgroundImage: {
+        'dark-hole': "url('./src/assets/bg-dark-hole.jpg')",
+      }
+    },
   },
   plugins: [],
 }

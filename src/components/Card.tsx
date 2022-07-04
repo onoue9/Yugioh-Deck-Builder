@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { getCard } from '../services/fetch';
 
-interface Card {
+export interface Card {
   archetype: string;
   atk: number;
   card_images: [{
@@ -36,29 +36,19 @@ export type GetCardResponse = {
   data: Card[];
 }
 
-export function Card() {
-  const [cards, setCards] = useState<Card[]>([]);
-
-useEffect(() => {
-  const getCards = async () => {
-    const { data } = await getCard();
-    setCards(data);
-  };
-  getCards();
-}, [])
+export function Card(props:Card) {
 
   return (
-    <>
-     {cards.map(card => {
-      return (
-        <div 
-          key={card.id}
-          className="flex-col text-center w-20 h-20"
-        >
-          <img src={card.card_images[0].image_url} />
-        </div>
-      )
-     })}
-    </>
+    <div className="flex flex-col m-1 p-0 w-80">
+      <div className="flex border m-1 p-2 w-full h-full">
+        <img src={props.card_images[0].image_url}></img>
+      </div>
+      <div className="flex flex-col border m-1 p-2 w-full h-full text-center">
+        <span><strong>Name:</strong> {props.name}</span>
+        <span><strong>Atk:</strong> {props.atk}</span>
+        <span><strong>Def:</strong> {props.def}</span>
+        <span><strong>Desc:</strong> " {props.desc} "</span>
+      </div>
+    </div>
   )
 };
