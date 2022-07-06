@@ -1,6 +1,3 @@
-import { useEffect, useState } from "react";
-import { getCard } from '../services/fetch';
-
 export interface Card {
   archetype: string;
   atk: number;
