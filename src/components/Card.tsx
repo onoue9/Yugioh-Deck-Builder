@@ -53,7 +53,7 @@ export function Card(props:Card) {
           <a className="close" onClick={closeModal}>
             &times;
           </a>
-          <div className="flex flex-col rounded-lg m-1 p-2 w-3/12 h-9/12 justify-center self-center text-center bg-slate-800 text-white">
+          <div className="flex flex-col rounded-lg m-1 p-2 w-4/5 h-auto justify-center self-center text-center bg-slate-800 text-white">
             <p className="self-center text-xl underline">{props.name}</p>
             <span><strong>Level:</strong> {props.level}</span>
             <span><strong>Race:</strong> {props.race}</span>
@@ -61,7 +61,7 @@ export function Card(props:Card) {
             <span><strong>Atk:</strong> {props.atk}</span>
             <span><strong>Def:</strong> {props.def}</span>
             <p><strong>Description:</strong></p>
-            <span className="w-11/12 self-center">{props.desc}</span>
+            <span className="w-6/12 self-center">{props.desc}</span>
           </div>
         </div>
       </Popup>
