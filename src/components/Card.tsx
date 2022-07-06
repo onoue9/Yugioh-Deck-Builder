@@ -1,3 +1,6 @@
+import { useState } from "react";
+import Popup from "reactjs-popup";
+
 export interface Card {
   archetype: string;
   atk: number;
@@ -34,18 +37,34 @@ export type GetCardResponse = {
 }
 
 export function Card(props:Card) {
-
+  const [open, setOpen] = useState(false);
+  const closeModal = () => setOpen(false);
   return (
     <div className="flex flex-col m-1 p-0 w-80">
-      <div className="flex border m-1 p-2 w-full h-full">
+      <button
+        type="button"
+        className="button flex border m-1 p-2 w-full h-full"
+        onClick={() => setOpen(o => !o)}
+        >
         <img src={props.card_images[0].image_url}></img>
-      </div>
-      <div className="flex flex-col border m-1 p-2 w-full h-full text-center">
-        <span><strong>Name:</strong> {props.name}</span>
-        <span><strong>Atk:</strong> {props.atk}</span>
-        <span><strong>Def:</strong> {props.def}</span>
-        <span><strong>Desc:</strong> " {props.desc} "</span>
-      </div>
+      </button>
+      <Popup open={open} closeOnDocumentClick onClose={closeModal}>
+        <div className="modal flex justify-center">
+          <a className="close" onClick={closeModal}>
+            &times;
+          </a>
+          <div className="flex flex-col rounded-lg m-1 p-2 w-3/12 h-9/12 justify-center self-center text-center bg-slate-800 text-white">
+            <p className="self-center text-xl underline">{props.name}</p>
+            <span><strong>Level:</strong> {props.level}</span>
+            <span><strong>Race:</strong> {props.race}</span>
+            <span><strong>Type:</strong> {props.type}</span>
+            <span><strong>Atk:</strong> {props.atk}</span>
+            <span><strong>Def:</strong> {props.def}</span>
+            <p><strong>Description:</strong></p>
+            <span className="w-11/12 self-center">{props.desc}</span>
+          </div>
+        </div>
+      </Popup>
     </div>
   )
 };
