@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Popup from "reactjs-popup";
 
 export interface Card {
@@ -39,21 +39,25 @@ export type GetCardResponse = {
 export function Card(props:Card) {
   const [open, setOpen] = useState(false);
   const closeModal = () => setOpen(false);
+
   return (
-    <div className="flex flex-col m-1 p-0 w-80">
+    <div className="flex flex-col m-1">
       <button
         type="button"
-        className="button flex border m-1 p-2 w-full h-full"
-        onClick={() => setOpen(o => !o)}
+        className="button flex border p-1 w-full h-full"
+        onClick={() => {
+          setOpen(o => !o)
+        }}
         >
-        <img src={props.card_images[0].image_url}></img>
+        <img src={props.card_images[0].image_url_small} />
       </button>
       <Popup open={open} closeOnDocumentClick onClose={closeModal}>
         <div className="modal flex justify-center">
           <a className="close" onClick={closeModal}>
             &times;
           </a>
-          <div className="flex flex-col rounded-lg m-1 p-2 w-4/5 h-auto justify-center self-center text-center bg-slate-800 text-white">
+          <div className="flex flex-col rounded-lg w-auto h-auto p-10 justify-center self-center text-center bg-black text-white">
+            <img className="self-center w-80"src={props.card_images[0].image_url} />
             <p className="self-center text-xl underline">{props.name}</p>
             <span><strong>Level:</strong> {props.level}</span>
             <span><strong>Race:</strong> {props.race}</span>
@@ -61,7 +65,7 @@ export function Card(props:Card) {
             <span><strong>Atk:</strong> {props.atk}</span>
             <span><strong>Def:</strong> {props.def}</span>
             <p><strong>Description:</strong></p>
-            <span className="w-6/12 self-center">{props.desc}</span>
+            <span className=" self-center">{props.desc}</span>
           </div>
         </div>
       </Popup>

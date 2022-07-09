@@ -23,7 +23,7 @@ export function CardBox() {
     previousEnabled,
     startIndex,
     endIndex,
-  } = usePagination({ totalItems: cards.length, initialPageSize: 28 });
+  } = usePagination({ totalItems: cards.length, initialPageSize: 31 });
   
   return (
     <div className="flex flex-col justify-center">
