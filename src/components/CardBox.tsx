@@ -3,13 +3,13 @@ import { getCard } from "../services/fetch";
 import { Card } from "./Card";
 import { usePagination } from 'react-use-pagination';
 
-export function CardBox() {
+export function CardBox({ main }: { main: any}) {
   const [cards, setCards] = useState<Card[]>([]);
   
   useEffect(() => {
     const getCards = async () => {
       const { data } = await getCard();
-      setCards(data);
+      setCards(data.filter((item) => item.type !== 'Skill Card'));
     };
     getCards();
   }, []);
@@ -23,7 +23,7 @@ export function CardBox() {
     previousEnabled,
     startIndex,
     endIndex,
-  } = usePagination({ totalItems: cards.length, initialPageSize: 31 });
+  } = usePagination({ totalItems: cards.length, initialPageSize: 29 });
   
   return (
     <div className="flex flex-col justify-center">
@@ -46,6 +46,7 @@ export function CardBox() {
                 race={card.race}
                 scale={card.scale}
                 type={card.type}
+                main={main}
               />
             )
           })}
